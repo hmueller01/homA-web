@@ -1,4 +1,6 @@
-FROM gliderlabs/alpine:3.1
-RUN ["apk", "--update", "add", "darkhttpd"]
-ADD . /srv/www
-ENTRYPOINT ["darkhttpd", "/srv/www"]
+FROM gliderlabs/alpine:3.2
+
+RUN ["apk-install", "darkhttpd"]
+ADD . /var/www/
+
+CMD darkhttpd /var/www --port ${PORT:-80}
